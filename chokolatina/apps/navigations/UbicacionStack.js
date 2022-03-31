@@ -8,9 +8,9 @@ export default function UbicacionStack(){
     return(
         <Stack.Navigator>
             <Stack.Screen
-            name='ubicación'
+            name='ubicacion'
             component={Ubicacion}
-            options={{title:'Ubicación'}}
+            options={{title:'Ubicacion'}}
             />
         </Stack.Navigator>
     )

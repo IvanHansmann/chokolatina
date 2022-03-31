@@ -4,12 +4,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import { Icon } from 'react-native-elements'
 
-import ChokolatinaStack from './ChocolatinaStack'
 import ProductosStack from './ProductosStack'
 import OfertasStack from './OfertasStack'
 import PersonalizadosStack from './PersonalizadosStack'
 import UbicacionStack from './UbicacionStack'
-
+import AccountStack from './AccountStack'
 
 const Tab = createBottomTabNavigator()
 
@@ -20,32 +19,35 @@ export default function Navigation(){
               initialRouteName="restaurants"
               tabBarOptions={{
                   inactiveTintColor: '#646464',
-                  activeTintColor: '#00a680'
+                  activeTintColor: '#800080'
               }}
               screenOptions={({route})  => ({
                       tabBarIcon:({color})=>screenOptions(route,color)
               })}
             >
-                <Tab.Screen name= 'chokolatina' 
-                component={ChokolatinaStack}
-                options={{title: "Chokolatina"}}
+                <Tab.Screen name= 'ofertas' 
+                component={OfertasStack}
+                options={{title: "Ofertas del Día"}}
                 />
+                
                 <Tab.Screen name= 'productos' 
                 component={ProductosStack}
                 options={{title: "Lista de Productos"}}
                 />
-                <Tab.Screen name= 'ofertas' 
-                component={OfertasStack}
-                options={{title: "Ofertas del dia"}}
-                />
+            
                 <Tab.Screen name= 'ubicacion' 
                 component={UbicacionStack}
-                options={{title: "Ubicacion"}}
+                options={{title: "Ubicación"}}
                 />
                 <Tab.Screen name= 'personalizados' 
                 component={PersonalizadosStack}
                 options={{title: "Productos personalizados"}}
-                />               
+                />       
+
+                <Tab.Screen name='account' 
+                component={AccountStack} 
+                options={{title:"Cuenta"}}/>
+
             </Tab.Navigator>
         </NavigationContainer>
     )
@@ -54,19 +56,20 @@ export default function Navigation(){
 function screenOptions(route,color){
     let iconName
     switch(route.name){
-        case 'chocolatina':
-            iconName='compass-outline'
-        break
+        
         case 'productos':
-            iconName='heart-outline'
+            iconName='book'
         break
         case 'ofertas':
             iconName='star-outline'
         break
         case 'ubicacion':
-            iconName='magnify'
+            iconName='compass-outline'
         break
         case 'personalizados':
+            iconName='draw'
+        break
+        case 'account':
             iconName = 'home-outline'
         break
     }
