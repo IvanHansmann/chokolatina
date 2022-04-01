@@ -31,7 +31,7 @@ function CreateAccount(){
         style = {styles.linkRegister}
         onPress={()=>navigation.navigate('register')}
         >
-            Sign Up 
+            Registrate
             </Text>
         </Text>   
     )
@@ -48,7 +48,7 @@ const styles =StyleSheet.create({
         marginLeft:40
     },
     divider:{
-        backgroundColor:'#00a680',
+        backgroundColor:'#9E521A',
         margin:40
     },
     textRegister:{
@@ -57,7 +57,7 @@ const styles =StyleSheet.create({
         marginRight:10
     },
     linkRegister:{
-        color:'#00a680',
+        color:'#9E521A',
         fontWeight:'bold'
     }
 
