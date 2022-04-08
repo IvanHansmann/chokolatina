@@ -1,29 +1,28 @@
-import React from "react";
-import {StyleSheet,View, ScrollView,Text, Image} from 'react-native'
-import { Divider } from "react-native-elements";
-import { useNavigation } from "@react-navigation/native";
-import LoginForm from "../../components/Account/LoginForm";
+import React,{useRef} from "react"
+import { StyleSheet, View, ScrollView, Text, Image } from "react-native"
+import LoginForm from "../../components/Account/LoginForm"
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { Divider } from "react-native-elements"
+import { useNavigation } from "@react-navigation/native"
+import Toast from "react-native-toast-message"
 
 export default function Login(){
-    
-    return (
-        <ScrollView>
-        <Image
-        source={require('../../../assets/img/Chokolatina.png')}
-        resizeMode='contain'
-        style={styles.logo}
+    const toastRef = useRef()
+    return(
+    <KeyboardAwareScrollView>
+        <Image 
+            source={require('../../../assets/img/Chokolatina.png')}
+            resizeMode='contain'
+            style={styles.logo}
         />
-        <Text>Login Form</Text>
-        <LoginForm/>
-
         <View style={styles.viewContainer}>
-            
-            <CreateAccount/>
+            <LoginForm toastRef={toastRef}/>    
+            <CreateAccount/>    
         </View>
-        <Divider style={styles.divider}/>
-    </ScrollView>
+        <Toast ref={toastRef}/>
+        <Divider style={styles.divider}/>        
+    </KeyboardAwareScrollView>
     )
-    
 }
 
 function CreateAccount(){

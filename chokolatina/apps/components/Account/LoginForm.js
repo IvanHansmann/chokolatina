@@ -1,9 +1,10 @@
 import React, { useState} from "react"
-import { StyleSheet, View} from 'react-native' 
+import { StyleSheet, View, Text, Image} from 'react-native' 
 import { Input, Icon, Button } from 'react-native-elements'
 import { validateEmail } from '../../utils/validation'
 import firebase from "firebase"
 import { useNavigation } from "@react-navigation/native"
+import Loading from "../Loading"    
 
 export default function LoginForm(props){
     const {toastRef} = props 
@@ -110,5 +111,10 @@ const styles = StyleSheet.create({
     },
     iconRight:{
         color:'#c1c1c1'
+    },
+    logo:{
+        width: '100%',
+        height: 150,
+        marginTop: 20
     }
 })
