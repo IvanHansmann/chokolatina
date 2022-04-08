@@ -13,7 +13,7 @@ export default function UserGuest(){
             />
             <Text style={styles.title}> Ingresa a tu perfil</Text>
             <Text style={styles.description}> 
-            Busca y visualiza las mejores opciones en restaurantes de tu ciudad, no olvides rankear tus favoritos.
+            Checa la gran variedad de productos de chocolate que ofrecemos a buen precio.
             </Text>
             <View style={styles.viewBtn}>
                 <Button 
