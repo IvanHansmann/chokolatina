@@ -2,23 +2,65 @@ import React, { useState } from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import { Input, Icon, Button } from 'react-native-elements' 
 import { validateEmail } from '../../utils/validation'
+import firebase from "firebase"
+import { useNavigation } from "@react-navigation/native"
 
-export default function RegisterForm(){
+export default function RegisterForm(props){
+    const{toastRef}= props
     const [showPassword, setShowPassword] = useState(false)
     const [showRepeatPasssword, setShowRepeatPassword ] = useState(false)
     const [formData, setFormData] = useState(defaultFormValues())
+    const navigation = useNavigation()
 
     const onSubmit = () => {
         if(formData.email.length===0||formData.password.length===0||formData.repeatPassword.length===0){
-            console.log('Todos los campos tienen que ser llenados')
+            toastRef.current.show({
+                type: 'error',
+                position: 'top',
+                text1: 'Empity',
+                text2: 'Es necesario que todos los campos sea chokollenados',
+                visibilityTime:3000
+            })
         } else if (!validateEmail(formData.email)){
-            console.log('El email no es correcto')
+            toastRef.current.show({
+                type: 'error',
+                position: 'top',
+                text1: 'Password',
+                text2: 'Tu chokoemail no es correcto',
+                visibilityTime:3000
+            })
         } else if (formData.password !== formData.repeatPassword){
-            console.log('Las contraseñas deben de ser las mismas')
+            toastRef.current.show({
+                type: 'error',
+                position: 'top',
+                text1: 'Password',
+                text2: 'Ups tu contraseña no es identica',
+                visibilityTime:3000
+            })
         }else if (formData.password.length <6){
-            console.log('La contraseña debe de tener minimo 6 caracteres')
+            toastRef.current.show({
+                type: 'error',
+                position: 'top',
+                text1: 'password',
+                text2: 'Minimo 6 caracteres, como tus calificaciones',
+                visibilityTime:3000
+            }) 
         } else{
-            console.log('Registro completado')  
+            firebase
+        .auth()
+        .createUserWithEmailAndPassword(formData.email, formData.password)
+        .then((response)=>{
+            navigation.navigate('account')
+        })
+        .catch(()=>{
+            toastRef.current.show({
+                type: 'error',
+                position: 'top',
+                text1: 'Cuenta',
+                text2: '¡Muy bien! Ya has sido registrado',
+                visibilityTime:3000
+            })
+        })
         }
     }
 
