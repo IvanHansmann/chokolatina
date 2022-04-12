@@ -8,19 +8,23 @@ import AccountOptions from "../../components/Account/AccountOptions";
 
 export default function UserLogged(){
     const [userInfo, setUserInfo] = useState(null)
+    const [reloadUserInfo, setReloadUserInfo] = useState(false)
     const toastRef = useRef()
+
+
     useEffect(()=>{
         (async()=>{
             const user = await firebase.auth().
             currentUser
             setUserInfo(user)
         })()
-    },[])
+    setReloadUserInfo(false)
+    },[reloadUserInfo])
 
     return(
         <View style={styles.viewUserInfo}>
-           { userInfo && <InfoUser userInfo={userInfo} toastRef={toastRef} />}
-           <AccountOptions userInfo ={userInfo} toastRef={toastRef}/>
+           { userInfo && (<InfoUser userInfo={userInfo} toastRef={toastRef} />)}
+            <AccountOptions userInfo={userInfo} toastRef={toastRef} setReloadUserInfo={setReloadUserInfo}/>
             <Button 
             title="Cerrar sesión" 
             buttonStyle={styles.btnCloseSession}
@@ -36,21 +40,19 @@ const styles = StyleSheet.create({
         minHeight: '100%',
         backgroundColor: '#f2f2f2'
     },
-    btnCloseSesion:{
+    btnCloseSession:{
         marginTop:30,
         borderRadius:0,
-        backgroundColor:'#00a680',
+        backgroundColor:'#9E521A',
         borderTopWidth:1,
-        borderTopColor:'#e3e3e3',
+        borderTopColor:'#9E521A',
         borderBottomWidth:1,
-        borderBottomColor:'#e3e3e3',
+        borderBottomColor:'#9E521A',
         paddingTop:10,
         paddingBottom:10, 
     },
-    btnCloseSesionText:{
-        backgroundColor:'#00a680'
+    btnCloseSessionText:{
+        backgroundColor:'#9E521A'
     }
 })
-
-
         
