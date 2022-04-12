@@ -3,7 +3,9 @@ import { StyleSheet, View, Text } from "react-native"
 import { ListItem} from "react-native-elements"
 import { Icon } from "react-native-elements/dist/icons/Icon"
 import Modal from '../Modal'
-import ChageDisplayNameForm from "../../screens/Account/ChangeDisplayNameform"
+import ChageDisplayNameForm from "./ChangeDisplayNameform"
+import ChangeDisplayEmailForm from "./ChangeDisplayEmailForm"
+import ChangeDisplayPasswordForm from "./ChangeDisplayPasswordForm"
 
 export default function AccountOptions(props){
     const {userInfo, toastRef, setReloadUserInfo} = props
@@ -15,7 +17,7 @@ export default function AccountOptions(props){
             case 'displayName':
                 setRenderComponent(
                 <ChageDisplayNameForm
-                    displayname={userInfo.displayname}
+                    displayName={userInfo.displayName}
                     setShowModal={setShowModal}
                     toastRef={toastRef}
                     setReloadUserInfo={setReloadUserInfo}                   
@@ -23,11 +25,24 @@ export default function AccountOptions(props){
                 setShowModal(true)
                 break
             case 'displayEmail':
-                setRenderComponent(<Text>Cambiando email</Text>)
+                setRenderComponent(
+                    <ChangeDisplayEmailForm
+                    email={userInfo.email}
+                    setShowModal={setShowModal}
+                    toastRef={toastRef}
+                    setReloadUserInfo={setReloadUserInfo}  
+                    />
+                )
                 setShowModal(true)
                 break
             case 'displayPassword':
-                setRenderComponent(<Text>Cambiando contraseña</Text>)
+                setRenderComponent(
+                    <ChangeDisplayPasswordForm
+                    displayPassword={userInfo.displayPassword}
+                    setShowModal={setShowModal}
+                    toastRef={toastRef}  
+                    />
+                )
                 setShowModal(true)
                 break
             default:
