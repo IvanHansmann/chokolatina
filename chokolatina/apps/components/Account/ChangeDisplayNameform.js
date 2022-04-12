@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native'
 import { Input, Button } from 'react-native-elements'
 import firebase from 'firebase'
 
-export default function ChageDisplayNameForm(props){
+export default function ChangeDisplayNameForm(props){
     const{displayName, setShowModal, toastRef, setReloadUserInfo}= props
     const[newDisplayName, setNewDisplayName] = useState(null)
     const[error, setError] = useState(null)
@@ -23,6 +23,13 @@ export default function ChageDisplayNameForm(props){
             firebase.auth()
             .currentUser.updateProfile(update)
             .then(()=>{
+                toastRef.current.show({
+                    type: 'success',
+                    position: 'top',
+                    text1: 'Profile',
+                    text2: 'Se ha cambiado el nombre con exito',
+                    visibilityTime: 3000
+                }) 
                 console.log('Todo bien en firebase')
                 setIsLoading(false)
                 setReloadUserInfo(true)
